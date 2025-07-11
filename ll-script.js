@@ -64,9 +64,6 @@ window.addEventListener("load", () => {
     const x = e.clientX;
     const y = e.clientY;
 
-    // Zet muispositie als variabelen voor de clip-path
-    portal.style.setProperty("--x", `${x}px`);
-    portal.style.setProperty("--y", `${y}px`);
 
     portal.classList.add("active");
     document.body.style.overflow = "hidden";
