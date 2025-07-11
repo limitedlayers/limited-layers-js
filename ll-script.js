@@ -40,34 +40,40 @@ document.addEventListener("DOMContentLoaded", function () {
   const glow = document.querySelector(".reveal-glow");
   const mask = document.querySelector(".reveal-mask");
 
-  if (!glow || !mask) return;
-
   const alreadyRevealed = localStorage.getItem("glowRevealed") === "true";
 
+  if (!glow || !mask) return;
+
   if (alreadyRevealed) {
-    glow.remove(); // of: glow.style.display = "none";
-    mask.classList.add("revealed"); // volledig geopend
+    glow.remove(); // verwijder glow permanent
+    mask.classList.add("revealed"); // zet mask direct open
     mask.style.pointerEvents = "none";
     return;
   }
 
-  // Eerste klik opent animatie
-  glow.addEventListener("click", function () {
-    mask.classList.add("revealed");
+  glow.addEventListener("click", function (e) {
+    const x = e.clientX;
+    const y = e.clientY;
+
+    // open animatie vanaf klikpositie
+    mask.style.clipPath = `circle(0% at ${x}px ${y}px)`;
+    void mask.offsetWidth;
+    mask.style.clipPath = `circle(150% at ${x}px ${y}px)`;
+
     localStorage.setItem("glowRevealed", "true");
 
-    // Glow verdwijnt na animatie
+    // Glow fade-out
     setTimeout(() => {
-      glow.style.opacity = "0";
-      glow.style.pointerEvents = "none";
+      glow.remove();
     }, 1000);
 
-    // Zet mask na animatie open + niet blokkerend
+    // Mask pointer-events uitschakelen na animatie
     setTimeout(() => {
       mask.style.pointerEvents = "none";
     }, 1600);
   });
 });
+
 
 
 
