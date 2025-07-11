@@ -39,15 +39,14 @@ document.addEventListener("DOMContentLoaded", function () {
 document.addEventListener("DOMContentLoaded", function () {
   const glow = document.querySelector(".reveal-glow");
   const mask = document.querySelector(".reveal-mask");
-  const hideWrapper = document.querySelector(".hidewrapper");
 
   const alreadyRevealed = localStorage.getItem("glowRevealed") === "true";
 
-  if (!glow || !mask || !hideWrapper) return;
+  if (!glow || !mask) return;
 
   if (alreadyRevealed) {
     glow.style.display = "none";
-    mask.classList.add("open"); // forceer via class
+    mask.classList.add("open");
     mask.style.pointerEvents = "none";
     return;
   }
@@ -57,7 +56,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const y = e.clientY;
 
     mask.style.clipPath = `circle(0% at ${x}px ${y}px)`;
-    void mask.offsetWidth; // trigger reflow
+    void mask.offsetWidth;
     mask.style.clipPath = `circle(150% at ${x}px ${y}px)`;
 
     localStorage.setItem("glowRevealed", "true");
@@ -68,11 +67,12 @@ document.addEventListener("DOMContentLoaded", function () {
     }, 1000);
 
     setTimeout(() => {
-      mask.classList.add("open"); // blijvend open houden
+      mask.classList.add("open");
       mask.style.pointerEvents = "none";
     }, 1600);
   });
 });
+
 
 
 
