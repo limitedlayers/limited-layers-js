@@ -39,16 +39,36 @@ document.addEventListener("DOMContentLoaded", function () {
 document.addEventListener("DOMContentLoaded", function () {
   const glow = document.querySelector(".reveal-glow");
   const mask = document.querySelector(".reveal-mask");
+  const hideWrapper = document.querySelector(".hidewrapper");
 
-  if (!glow || !mask) return;
+  const alreadyRevealed = localStorage.getItem("glowRevealed") === "true";
+
+  if (!glow || !mask || !hideWrapper) return;
+
+  // Als al onthuld → direct mask en glow verbergen, hidewrapper blijft gewoon staan
+  if (alreadyRevealed) {
+    glow.style.display = "none";
+    mask.style.display = "none";
+    return;
+  }
 
   glow.addEventListener("click", function (e) {
     const x = e.clientX;
     const y = e.clientY;
 
+    // Start animatie op mask
     mask.style.clipPath = `circle(0% at ${x}px ${y}px)`;
     void mask.offsetWidth;
     mask.style.clipPath = `circle(150% at ${x}px ${y}px)`;
+
+    // Markeer als onthuld
+    localStorage.setItem("glowRevealed", "true");
+
+    // Na animatie: mask weg, glow weg, site actief
+    setTimeout(() => {
+      mask.style.display = "none";
+      glow.style.display = "none";
+    }, 1500);
   });
 });
 
