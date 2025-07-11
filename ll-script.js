@@ -53,52 +53,42 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 // 🕳️ Menu Overlay met Portaal Cirkel
-window.addEventListener("load", () => {
+document.addEventListener("DOMContentLoaded", () => {
   const hamburger = document.querySelector(".hamburger-icon");
   const portal = document.getElementById("menuPortal");
   const closeBtn = document.querySelector(".close-portal");
 
   if (!hamburger || !portal || !closeBtn) return;
 
-hamburger.addEventListener("click", (e) => {
-  const x = e.clientX;
-  const y = e.clientY;
+  hamburger.addEventListener("click", (e) => {
+    const x = e.clientX;
+    const y = e.clientY;
 
-  const circle = document.createElement("div");
-  circle.classList.add("portal-circle");
+    const circle = document.createElement("div");
+    circle.classList.add("portal-circle");
+    circle.style.top = `${y}px`;
+    circle.style.left = `${x}px`;
+    circle.style.transform = "translate(-50%, -50%)";
+    circle.style.width = "0px";
+    circle.style.height = "0px";
 
-  // Positionering
-  circle.style.top = `${y}px`;
-  circle.style.left = `${x}px`;
+    document.body.appendChild(circle);
+    void circle.offsetWidth; // force reflow
 
-  // Beginstaat (optioneel redundant)
-  circle.style.width = "0px";
-  circle.style.height = "0px";
+    circle.style.width = "3000px";
+    circle.style.height = "3000px";
 
-  document.body.appendChild(circle);
+    setTimeout(() => {
+      portal.classList.add("active");
+      portal.style.display = "flex";
+      document.body.style.overflow = "hidden";
+    }, 600);
 
-  // 👇 Force reflow zodat de volgende transition zichtbaar is
-  void circle.offsetWidth;
+    setTimeout(() => {
+      circle.remove();
+    }, 1200);
+  });
 
-  // 🔄 Start animatie
-  circle.style.width = "3000px";
-  circle.style.height = "3000px";
-
-  // 👁️ Zet menu pas NA animatie open
-  setTimeout(() => {
-    portal.classList.add("active");
-    portal.style.display = "flex";
-    document.body.style.overflow = "hidden";
-    document.body.classList.remove("cursor-hidden");
-  }, 600); // Match met CSS transition duration
-
-  // ❌ Remove circle after animation
-  setTimeout(() => {
-    circle.remove();
-  }, 1200);
-});
-
-  
   closeBtn.addEventListener("click", () => {
     portal.classList.remove("active");
     portal.style.display = "none";
