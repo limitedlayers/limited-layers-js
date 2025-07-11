@@ -57,17 +57,17 @@ document.addEventListener("DOMContentLoaded", () => {
   const portal = document.getElementById("menuPortal");
   const closeBtn = document.querySelector(".close-portal");
 
-  if (!hamburger || !portal || !closeBtn) return;
+  if (!hamburger || !portal || !closeBtn) {
+    console.warn("🔍 Element ontbreekt:", { hamburger, portal, closeBtn });
+    return;
+  }
 
   hamburger.addEventListener("click", (e) => {
     const x = `${e.clientX}px`;
     const y = `${e.clientY}px`;
 
-    // Zet CSS-variabelen op het element zelf
     portal.style.setProperty("--x", x);
     portal.style.setProperty("--y", y);
-
-    // Activeer menu
     portal.classList.add("active");
     document.body.style.overflow = "hidden";
   });
