@@ -66,27 +66,33 @@ hamburger.addEventListener("click", (e) => {
 
   const circle = document.createElement("div");
   circle.classList.add("portal-circle");
+
+  // Positionering
   circle.style.top = `${y}px`;
   circle.style.left = `${x}px`;
+
+  // Beginstaat (optioneel redundant)
   circle.style.width = "0px";
   circle.style.height = "0px";
+
   document.body.appendChild(circle);
 
-  // 👇 1. Start animatie
-  setTimeout(() => {
-    circle.style.width = "3000px";
-    circle.style.height = "3000px";
-  }, 10);
+  // 👇 Force reflow zodat de volgende transition zichtbaar is
+  void circle.offsetWidth;
 
-  // 👇 2. Open menu pas NA animatie (bv na 600ms)
+  // 🔄 Start animatie
+  circle.style.width = "3000px";
+  circle.style.height = "3000px";
+
+  // 👁️ Zet menu pas NA animatie open
   setTimeout(() => {
     portal.classList.add("active");
     portal.style.display = "flex";
     document.body.style.overflow = "hidden";
     document.body.classList.remove("cursor-hidden");
-  }, 600);
+  }, 600); // Match met CSS transition duration
 
-  // 👇 3. Verwijder de cirkel
+  // ❌ Remove circle after animation
   setTimeout(() => {
     circle.remove();
   }, 1200);
