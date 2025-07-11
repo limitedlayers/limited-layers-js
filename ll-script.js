@@ -64,32 +64,16 @@ window.addEventListener("load", () => {
     const x = e.clientX;
     const y = e.clientY;
 
-    const circle = document.createElement("div");
-    circle.classList.add("portal-circle");
-    circle.style.top = `${y}px`;
-    circle.style.left = `${x}px`;
-    circle.style.width = "0px";
-    circle.style.height = "0px";
-    document.body.appendChild(circle);
-
-    setTimeout(() => {
-      circle.style.width = "3000px";
-      circle.style.height = "3000px";
-      portal.classList.add("active");
-      portal.style.display = "flex";
-      document.body.style.overflow = "hidden";
-      document.body.classList.remove("cursor-hidden");
-    }, 10);
-
-    setTimeout(() => {
-      circle.remove();
-    }, 800);
+    portal.style.setProperty("--x", `${x}px`);
+    portal.style.setProperty("--y", `${y}px`);
+    portal.classList.add("active");
+    document.body.style.overflow = "hidden";
   });
 
   closeBtn.addEventListener("click", () => {
-    console.log("❌ Portal sluiten");
     portal.classList.remove("active");
     document.body.style.overflow = "";
   });
 });
+
 
