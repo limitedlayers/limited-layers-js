@@ -46,20 +46,19 @@ document.addEventListener("DOMContentLoaded", function () {
 
   if (alreadyRevealed) {
     glow.style.display = "none";
-    mask.classList.add("open", "no-transition"); // ⚠️ geen animatie bij terugkomst
-    mask.style.pointerEvents = "none";
-    return;
+    return; // mask is al open, niets doen
   }
+
+  // Eerste keer: reset mask naar gesloten en voeg animatie toe
+  mask.classList.add("animate");
+  mask.style.clipPath = "circle(0% at 50% 50%)";
 
   glow.addEventListener("click", function (e) {
     const x = e.clientX;
     const y = e.clientY;
 
-    mask.style.clipPath = `circle(0% at ${x}px ${y}px)`;
-    void mask.offsetWidth;
     mask.style.clipPath = `circle(150% at ${x}px ${y}px)`;
-
-    localStorage.setItem("glowRevealed", "true");
+    localStorage.setItem("glowRevealed", "true";
 
     setTimeout(() => {
       glow.style.opacity = "0";
@@ -67,7 +66,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }, 1000);
 
     setTimeout(() => {
-      mask.classList.add("open", "no-transition");
+      mask.classList.remove("animate");
       mask.style.pointerEvents = "none";
     }, 1600);
   });
