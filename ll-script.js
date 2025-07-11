@@ -124,12 +124,16 @@ window.addEventListener("load", () => {
   document.body.classList.remove("cursor-hidden");
 });
 
-  closeBtn.addEventListener("click", () => {
-    console.log("❌ Portal sluiten");
+closeBtn.addEventListener("click", () => {
+  console.log("❌ Portal sluiten");
+
+  portal.style.transition = "clip-path 0.5s ease-in";
+  portal.style.clipPath = `circle(0% at 50% 50%)`;
+  portal.style.webkitClipPath = `circle(0% at 50% 50%)`;
+
+  setTimeout(() => {
     portal.classList.remove("active");
     portal.style.display = "none";
     document.body.style.overflow = "";
-  });
-
-  console.log("✅ Portal script actief");
+  }, 500);
 });
