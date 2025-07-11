@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-// 🕳️ Menu Overlay met Portaal Cirkel
+// 🕳️ Menu Overlay zonder cirkel
 window.addEventListener("load", () => {
   const hamburger = document.querySelector(".hamburger-icon");
   const portal = document.getElementById("menuPortal");
@@ -64,26 +64,13 @@ window.addEventListener("load", () => {
     const x = e.clientX;
     const y = e.clientY;
 
-    const circle = document.createElement("div");
-    circle.classList.add("portal-circle");
-    circle.style.top = `${y}px`;
-    circle.style.left = `${x}px`;
-    circle.style.width = "0px";
-    circle.style.height = "0px";
-    document.body.appendChild(circle);
+    // Zet muispositie als variabelen voor de clip-path
+    portal.style.setProperty("--x", `${x}px`);
+    portal.style.setProperty("--y", `${y}px`);
 
-    setTimeout(() => {
-      circle.style.width = "3000px";
-      circle.style.height = "3000px";
-      portal.classList.add("active");
-      portal.style.display = "flex";
-      document.body.style.overflow = "hidden";
-      document.body.classList.remove("cursor-hidden");
-    }, 10);
-
-    setTimeout(() => {
-      circle.remove();
-    }, 800);
+    portal.classList.add("active");
+    document.body.style.overflow = "hidden";
+    document.body.classList.remove("cursor-hidden");
   });
 
   closeBtn.addEventListener("click", () => {
@@ -92,3 +79,4 @@ window.addEventListener("load", () => {
     document.body.style.overflow = "";
   });
 });
+
