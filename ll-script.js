@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", function () {
     aura.style.top = `${y}px`;
   });
 
-  // 🌕 Automatische hover-detectie op alles dat klikbaar is
+  // 🧿 Hover-detectie op alles dat klikbaar is
   document.addEventListener("mouseover", (e) => {
     const target = e.target;
     if (
@@ -30,21 +30,17 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  document.addEventListener("mouseout", (e) => {
+  document.addEventListener("mouseout", () => {
     aura.classList.remove("hovered");
   });
 });
 
-
-// 🌕 Reveal Glow Interactie
+// 🌑 Reveal Glow Interactie
 document.addEventListener("DOMContentLoaded", function () {
   const glow = document.querySelector(".reveal-glow");
   const mask = document.querySelector(".reveal-mask");
 
-  if (!glow || !mask) {
-    console.warn("🔍 reveal-glow of reveal-mask niet gevonden");
-    return;
-  }
+  if (!glow || !mask) return;
 
   glow.addEventListener("click", function (e) {
     const x = e.clientX;
@@ -53,29 +49,18 @@ document.addEventListener("DOMContentLoaded", function () {
     mask.style.clipPath = `circle(0% at ${x}px ${y}px)`;
     void mask.offsetWidth;
     mask.style.clipPath = `circle(150% at ${x}px ${y}px)`;
-
-    console.log("✨ Reveal vanaf:", x, y);
   });
 });
 
-// 🌕 Menu Overlay
+// 🕳️ Menu Overlay met Portaal Cirkel
 window.addEventListener("load", () => {
-  console.log("📦 window.load bereikt");
-
   const hamburger = document.querySelector(".hamburger-icon");
   const portal = document.getElementById("menuPortal");
   const closeBtn = document.querySelector(".close-portal");
 
-  console.log("✅ FINAL CHECK:", { hamburger, portal, closeBtn });
-
-  if (!hamburger || !portal || !closeBtn) {
-    console.warn("❌ Elementen niet gevonden na full load");
-    return;
-  }
+  if (!hamburger || !portal || !closeBtn) return;
 
   hamburger.addEventListener("click", (e) => {
-    console.log("🍔 Hamburger geklikt");
-
     const x = e.clientX;
     const y = e.clientY;
 
@@ -102,7 +87,6 @@ window.addEventListener("load", () => {
   });
 
   closeBtn.addEventListener("click", () => {
-    console.log("❌ Portal sluiten");
     portal.classList.remove("active");
     portal.style.display = "none";
     document.body.style.overflow = "";
