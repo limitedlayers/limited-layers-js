@@ -60,34 +60,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (!hamburger || !portal || !closeBtn) return;
 
-  hamburger.addEventListener("click", (e) => {
-    const x = e.clientX;
-    const y = e.clientY;
+hamburger.addEventListener("click", (e) => {
+  const x = `${e.clientX}px`;
+  const y = `${e.clientY}px`;
 
-    const circle = document.createElement("div");
-    circle.classList.add("portal-circle");
-    circle.style.top = `${y}px`;
-    circle.style.left = `${x}px`;
-    circle.style.transform = "translate(-50%, -50%)";
-    circle.style.width = "0px";
-    circle.style.height = "0px";
+  portal.style.setProperty("--x", x);
+  portal.style.setProperty("--y", y);
 
-    document.body.appendChild(circle);
-    void circle.offsetWidth; // force reflow
-
-    circle.style.width = "3000px";
-    circle.style.height = "3000px";
-
-    setTimeout(() => {
-      portal.classList.add("active");
-      portal.style.display = "flex";
-      document.body.style.overflow = "hidden";
-    }, 600);
-
-    setTimeout(() => {
-      circle.remove();
-    }, 1200);
-  });
+  portal.classList.add("active");
+  document.body.style.overflow = "hidden";
+});
 
   closeBtn.addEventListener("click", () => {
     portal.classList.remove("active");
