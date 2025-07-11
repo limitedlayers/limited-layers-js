@@ -45,8 +45,9 @@ document.addEventListener("DOMContentLoaded", function () {
   if (!glow || !mask) return;
 
   if (alreadyRevealed) {
-    glow.remove(); // verwijder glow permanent
-    mask.classList.add("revealed"); // zet mask direct open
+    glow.style.opacity = "0";
+    glow.style.pointerEvents = "none";
+    mask.classList.add("revealed");
     mask.style.pointerEvents = "none";
     return;
   }
@@ -55,24 +56,23 @@ document.addEventListener("DOMContentLoaded", function () {
     const x = e.clientX;
     const y = e.clientY;
 
-    // open animatie vanaf klikpositie
     mask.style.clipPath = `circle(0% at ${x}px ${y}px)`;
     void mask.offsetWidth;
     mask.style.clipPath = `circle(150% at ${x}px ${y}px)`;
 
     localStorage.setItem("glowRevealed", "true");
 
-    // Glow fade-out
     setTimeout(() => {
-      glow.remove();
+      glow.style.opacity = "0";
+      glow.style.pointerEvents = "none";
     }, 1000);
 
-    // Mask pointer-events uitschakelen na animatie
     setTimeout(() => {
       mask.style.pointerEvents = "none";
     }, 1600);
   });
 });
+
 
 
 
