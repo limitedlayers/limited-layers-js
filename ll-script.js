@@ -46,9 +46,9 @@ document.addEventListener("DOMContentLoaded", function () {
   if (!glow || !mask || !hideWrapper) return;
 
   if (alreadyRevealed) {
-    // Alleen glow verbergen, mask = open
     glow.style.display = "none";
-    mask.style.clipPath = "circle(150% at 50% 50%)";
+    mask.classList.add("open"); // forceer via class
+    mask.style.pointerEvents = "none";
     return;
   }
 
@@ -57,23 +57,23 @@ document.addEventListener("DOMContentLoaded", function () {
     const y = e.clientY;
 
     mask.style.clipPath = `circle(0% at ${x}px ${y}px)`;
-    void mask.offsetWidth;
+    void mask.offsetWidth; // trigger reflow
     mask.style.clipPath = `circle(150% at ${x}px ${y}px)`;
 
     localStorage.setItem("glowRevealed", "true");
 
-    // fade-out glow na animatie
     setTimeout(() => {
       glow.style.opacity = "0";
       glow.style.pointerEvents = "none";
-    }, 1000); // fade-out glow zelf
+    }, 1000);
 
-    // eventueel mask niet verwijderen, maar gewoon laten staan met grote clip-path
     setTimeout(() => {
-      mask.style.pointerEvents = "none"; // doorlaten na animatie
+      mask.classList.add("open"); // blijvend open houden
+      mask.style.pointerEvents = "none";
     }, 1600);
   });
 });
+
 
 
 
