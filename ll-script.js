@@ -46,14 +46,12 @@ document.addEventListener("DOMContentLoaded", function () {
   if (!glow || !mask || !hideWrapper) return;
 
   if (alreadyRevealed) {
-    // 1️⃣ Zorg dat glow en mask niet meer blokkeren
-    glow.remove();
-    mask.remove();
-    hideWrapper.style.clipPath = "none"; // veiligheid
+    // Alleen glow verbergen, mask = open
+    glow.style.display = "none";
+    mask.style.clipPath = "circle(150% at 50% 50%)";
     return;
   }
 
-  // 2️⃣ Eerste keer: klik activeert animatie
   glow.addEventListener("click", function (e) {
     const x = e.clientX;
     const y = e.clientY;
@@ -64,12 +62,19 @@ document.addEventListener("DOMContentLoaded", function () {
 
     localStorage.setItem("glowRevealed", "true");
 
+    // fade-out glow na animatie
     setTimeout(() => {
-      glow.remove();
-      mask.remove();
-    }, 1500);
+      glow.style.opacity = "0";
+      glow.style.pointerEvents = "none";
+    }, 1000); // fade-out glow zelf
+
+    // eventueel mask niet verwijderen, maar gewoon laten staan met grote clip-path
+    setTimeout(() => {
+      mask.style.pointerEvents = "none"; // doorlaten na animatie
+    }, 1600);
   });
 });
+
 
 
 
