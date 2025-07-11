@@ -40,17 +40,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const glow = document.querySelector(".reveal-glow");
   const mask = document.querySelector(".reveal-mask");
 
-  const alreadyRevealed = localStorage.getItem("glowRevealed") === "true";
-
   if (!glow || !mask) return;
-
-  if (alreadyRevealed) {
-    glow.style.opacity = "0";
-    glow.style.pointerEvents = "none";
-    mask.classList.add("revealed");
-    mask.style.pointerEvents = "none";
-    return;
-  }
 
   glow.addEventListener("click", function (e) {
     const x = e.clientX;
@@ -59,28 +49,8 @@ document.addEventListener("DOMContentLoaded", function () {
     mask.style.clipPath = `circle(0% at ${x}px ${y}px)`;
     void mask.offsetWidth;
     mask.style.clipPath = `circle(150% at ${x}px ${y}px)`;
-
-    localStorage.setItem("glowRevealed", "true");
-
-    setTimeout(() => {
-      glow.style.opacity = "0";
-      glow.style.pointerEvents = "none";
-    }, 1000);
-
-    setTimeout(() => {
-      mask.style.pointerEvents = "none";
-    }, 1600);
   });
 });
-
-
-
-
-
-
-
-
-
 
 
 
