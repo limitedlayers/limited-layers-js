@@ -41,10 +41,11 @@ document.addEventListener("DOMContentLoaded", function () {
   const mask = document.querySelector(".reveal-mask");
 
   // Check of het al eens is gebeurd
-  if (localStorage.getItem("glowRevealed") === "true") {
-    if (glow) glow.style.display = "none"; // of .remove() als je het echt weg wilt
-    return;
-  }
+if (localStorage.getItem("glowRevealed") === "true") {
+  if (glow) glow.style.display = "none";
+  if (mask) mask.style.display = "none"; // 🔥 ook mask direct verbergen
+  return;
+}
 
   if (!glow || !mask) return;
 
@@ -60,11 +61,12 @@ document.addEventListener("DOMContentLoaded", function () {
     localStorage.setItem("glowRevealed", "true");
 
     // Optioneel: glow langzaam laten verdwijnen
-    setTimeout(() => {
-      glow.style.opacity = "0";
-      glow.style.pointerEvents = "none";
-    }, 1000);
-  });
+setTimeout(() => {
+  glow.style.opacity = "0";
+  glow.style.pointerEvents = "none";
+  mask.style.display = "none"; // 🔥 mask verbergen na animatie
+}, 1500); // wacht tot de clip-path animatie klaar is
+
 });
 
 
