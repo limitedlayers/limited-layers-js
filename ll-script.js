@@ -36,8 +36,6 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 // 🌑 Reveal Glow Interactie
-const firstVisit = !localStorage.getItem("glowRevealed");
-
 document.addEventListener("DOMContentLoaded", function () {
   const glow = document.querySelector(".reveal-glow");
   const mask = document.querySelector(".reveal-mask");
@@ -48,13 +46,14 @@ document.addEventListener("DOMContentLoaded", function () {
   if (!glow || !mask || !hideWrapper) return;
 
   if (alreadyRevealed) {
-    // Verberg alleen glow & mask – laat de site door
-    glow.style.display = "none";
-    mask.style.display = "none";
+    // 1️⃣ Zorg dat glow en mask niet meer blokkeren
+    glow.remove();
+    mask.remove();
+    hideWrapper.style.clipPath = "none"; // veiligheid
     return;
   }
 
-  // Anders: wacht op klik
+  // 2️⃣ Eerste keer: klik activeert animatie
   glow.addEventListener("click", function (e) {
     const x = e.clientX;
     const y = e.clientY;
@@ -66,11 +65,12 @@ document.addEventListener("DOMContentLoaded", function () {
     localStorage.setItem("glowRevealed", "true");
 
     setTimeout(() => {
-      glow.style.display = "none";
-      mask.style.display = "none";
+      glow.remove();
+      mask.remove();
     }, 1500);
   });
 });
+
 
 
 
