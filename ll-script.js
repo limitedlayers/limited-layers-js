@@ -35,22 +35,13 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-// 🌑 Reveal Glow Interactie — slechts 1 keer tonen
+// 🌑 Reveal Glow Interactie
 document.addEventListener("DOMContentLoaded", function () {
   const glow = document.querySelector(".reveal-glow");
   const mask = document.querySelector(".reveal-mask");
 
-  const alreadyRevealed = localStorage.getItem("glowRevealed") === "true";
-
-  // Als al gezien → mask verbergen, maar glow zichtbaar houden
-  if (alreadyRevealed) {
-    if (mask) mask.style.display = "none";
-    return; // ⛔️ maar GEEN return als glow nog moet blijven
-  }
-
   if (!glow || !mask) return;
 
-  // Alleen eerste keer activeren
   glow.addEventListener("click", function (e) {
     const x = e.clientX;
     const y = e.clientY;
@@ -58,15 +49,8 @@ document.addEventListener("DOMContentLoaded", function () {
     mask.style.clipPath = `circle(0% at ${x}px ${y}px)`;
     void mask.offsetWidth;
     mask.style.clipPath = `circle(150% at ${x}px ${y}px)`;
-
-    localStorage.setItem("glowRevealed", "true");
-
-    setTimeout(() => {
-      mask.style.display = "none";
-    }, 1500);
   });
 });
-
 
 
 
