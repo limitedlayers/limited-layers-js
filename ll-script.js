@@ -52,7 +52,8 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-document.addEventListener("DOMContentLoaded", () => {
+// 🕳️ Menu Overlay met Clip-Path Animatie
+window.addEventListener("load", () => {
   const hamburger = document.querySelector(".hamburger-icon");
   const portal = document.getElementById("menuPortal");
   const closeBtn = document.querySelector(".close-portal");
@@ -70,10 +71,13 @@ document.addEventListener("DOMContentLoaded", () => {
     portal.style.setProperty("--y", y);
     portal.classList.add("active");
     document.body.style.overflow = "hidden";
+
+    console.log("✅ Menu geopend met clip-path op", x, y);
   });
 
   closeBtn.addEventListener("click", () => {
     portal.classList.remove("active");
     document.body.style.overflow = "";
+    console.log("❌ Menu gesloten");
   });
 });
