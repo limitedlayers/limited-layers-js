@@ -52,7 +52,6 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-// 🕳️ Menu Overlay met Portaal Cirkel
 document.addEventListener("DOMContentLoaded", () => {
   const hamburger = document.querySelector(".hamburger-icon");
   const portal = document.getElementById("menuPortal");
@@ -60,20 +59,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (!hamburger || !portal || !closeBtn) return;
 
-hamburger.addEventListener("click", (e) => {
-  const x = `${e.clientX}px`;
-  const y = `${e.clientY}px`;
+  hamburger.addEventListener("click", (e) => {
+    const x = `${e.clientX}px`;
+    const y = `${e.clientY}px`;
 
-  portal.style.setProperty("--x", x);
-  portal.style.setProperty("--y", y);
+    // Zet CSS-variabelen op het element zelf
+    portal.style.setProperty("--x", x);
+    portal.style.setProperty("--y", y);
 
-  portal.classList.add("active");
-  document.body.style.overflow = "hidden";
-});
+    // Activeer menu
+    portal.classList.add("active");
+    document.body.style.overflow = "hidden";
+  });
 
-closeBtn.addEventListener("click", () => {
-  portal.classList.remove("active");
-  // FADE hem uit via opacity en clip-path, dus GEEN display: none
-  document.body.style.overflow = "";
-});
+  closeBtn.addEventListener("click", () => {
+    portal.classList.remove("active");
+    document.body.style.overflow = "";
+  });
 });
