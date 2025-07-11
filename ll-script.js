@@ -40,14 +40,13 @@ document.addEventListener("DOMContentLoaded", function () {
   const glow = document.querySelector(".reveal-glow");
   const mask = document.querySelector(".reveal-mask");
 
-  // Check of het al eens is gebeurd
-if (localStorage.getItem("glowRevealed") === "true") {
-  if (glow) glow.style.display = "none";
-  if (mask) mask.style.display = "none"; // 🔥 ook mask direct verbergen
-  return;
-}
+  const alreadyRevealed = localStorage.getItem("glowRevealed") === "true";
 
-  if (!glow || !mask) return;
+  if (alreadyRevealed && mask) {
+    mask.style.display = "none"; // mask weg, glow blijft
+  }
+
+  if (!glow || !mask || alreadyRevealed) return;
 
   glow.addEventListener("click", function (e) {
     const x = e.clientX;
@@ -57,17 +56,14 @@ if (localStorage.getItem("glowRevealed") === "true") {
     void mask.offsetWidth;
     mask.style.clipPath = `circle(150% at ${x}px ${y}px)`;
 
-    // Markeer dat het nu 'gezien' is
     localStorage.setItem("glowRevealed", "true");
 
-    // Optioneel: glow langzaam laten verdwijnen
-setTimeout(() => {
-  glow.style.opacity = "0";
-  glow.style.pointerEvents = "none";
-  mask.style.display = "none"; // 🔥 mask verbergen na animatie
-}, 1500); // wacht tot de clip-path animatie klaar is
-
+    setTimeout(() => {
+      mask.style.display = "none"; // alleen mask verdwijnt
+    }, 1500);
+  });
 });
+
 
 
 // 🕳️ Menu Overlay zonder cirkel
