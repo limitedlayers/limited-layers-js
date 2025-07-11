@@ -45,37 +45,38 @@ document.addEventListener("DOMContentLoaded", function () {
   const alreadyRevealed = localStorage.getItem("glowRevealed") === "true";
 
   if (alreadyRevealed) {
-    // Glow weg, mask open, géén animatie
-    glow.style.display = "none";
+    // Mask direct openzetten
     mask.style.transition = "none";
     mask.style.clipPath = "circle(150% at 50% 50%)";
+    mask.style.pointerEvents = "none";
+
+    // Glow zichtbaar houden maar niet klikbaar
+    glow.classList.add("inactive-glow");
     return;
   }
 
+  // Eerste klik activeert animatie
   glow.addEventListener("click", function (e) {
     const x = e.clientX;
     const y = e.clientY;
 
-    // Open animatie vanaf klik
     mask.style.clipPath = `circle(0% at ${x}px ${y}px)`;
     void mask.offsetWidth;
     mask.style.clipPath = `circle(150% at ${x}px ${y}px)`;
 
-    // Markeer als getoond
     localStorage.setItem("glowRevealed", "true");
 
-    // Glow fade-out
     setTimeout(() => {
-      glow.style.opacity = "0";
+      glow.classList.add("inactive-glow");
       glow.style.pointerEvents = "none";
     }, 1000);
 
-    // Zorg dat clicks weer kunnen
     setTimeout(() => {
       mask.style.pointerEvents = "none";
     }, 1600);
   });
 });
+
 
 
 
