@@ -36,6 +36,8 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 // 🌑 Reveal Glow Interactie
+const firstVisit = !localStorage.getItem("glowRevealed");
+
 document.addEventListener("DOMContentLoaded", function () {
   const glow = document.querySelector(".reveal-glow");
   const mask = document.querySelector(".reveal-mask");
@@ -45,32 +47,31 @@ document.addEventListener("DOMContentLoaded", function () {
 
   if (!glow || !mask || !hideWrapper) return;
 
-  // Als al onthuld → direct mask en glow verbergen, hidewrapper blijft gewoon staan
   if (alreadyRevealed) {
+    // Verberg alleen glow & mask – laat de site door
     glow.style.display = "none";
     mask.style.display = "none";
     return;
   }
 
+  // Anders: wacht op klik
   glow.addEventListener("click", function (e) {
     const x = e.clientX;
     const y = e.clientY;
 
-    // Start animatie op mask
     mask.style.clipPath = `circle(0% at ${x}px ${y}px)`;
     void mask.offsetWidth;
     mask.style.clipPath = `circle(150% at ${x}px ${y}px)`;
 
-    // Markeer als onthuld
     localStorage.setItem("glowRevealed", "true");
 
-    // Na animatie: mask weg, glow weg, site actief
     setTimeout(() => {
-      mask.style.display = "none";
       glow.style.display = "none";
+      mask.style.display = "none";
     }, 1500);
   });
 });
+
 
 
 
