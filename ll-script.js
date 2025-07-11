@@ -82,18 +82,19 @@ window.addEventListener("load", () => {
 
 // 🌐 Automatisch actieve menu-link markeren op basis van URL
 document.addEventListener("DOMContentLoaded", () => {
-  const currentPath = window.location.pathname;
+  const currentPath = window.location.pathname.replace(/\/$/, ""); // strip trailing slash
   const menuLinks = document.querySelectorAll(".menu-link");
 
   menuLinks.forEach((link) => {
-    const href = link.getAttribute("href");
+    const href = link.getAttribute("href").replace(/\/$/, "");
 
-    // Check of current path begint met de href van deze link
     if (
-      (href === "/" && currentPath === "/") ||
+      (href === "" && currentPath === "") ||
+      (href === "/" && currentPath === "") || // root
       (href !== "/" && currentPath.startsWith(href))
     ) {
       link.classList.add("active");
     }
   });
 });
+
