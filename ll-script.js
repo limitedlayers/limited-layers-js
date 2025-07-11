@@ -60,31 +60,38 @@ window.addEventListener("load", () => {
 
   if (!hamburger || !portal || !closeBtn) return;
 
-  hamburger.addEventListener("click", (e) => {
-    const x = e.clientX;
-    const y = e.clientY;
+hamburger.addEventListener("click", (e) => {
+  const x = e.clientX;
+  const y = e.clientY;
 
-    const circle = document.createElement("div");
-    circle.classList.add("portal-circle");
-    circle.style.top = `${y}px`;
-    circle.style.left = `${x}px`;
-    circle.style.width = "0px";
-    circle.style.height = "0px";
-    document.body.appendChild(circle);
+  const circle = document.createElement("div");
+  circle.classList.add("portal-circle");
+  circle.style.top = `${y}px`;
+  circle.style.left = `${x}px`;
+  circle.style.width = "0px";
+  circle.style.height = "0px";
+  document.body.appendChild(circle);
 
-    setTimeout(() => {
-      circle.style.width = "3000px";
-      circle.style.height = "3000px";
-      portal.classList.add("active");
-      portal.style.display = "flex";
-      document.body.style.overflow = "hidden";
-      document.body.classList.remove("cursor-hidden");
-    }, 10);
+  // 👇 1. Start animatie
+  setTimeout(() => {
+    circle.style.width = "3000px";
+    circle.style.height = "3000px";
+  }, 10);
 
-    setTimeout(() => {
-      circle.remove();
-    }, 800);
-  });
+  // 👇 2. Open menu pas NA animatie (bv na 600ms)
+  setTimeout(() => {
+    portal.classList.add("active");
+    portal.style.display = "flex";
+    document.body.style.overflow = "hidden";
+    document.body.classList.remove("cursor-hidden");
+  }, 600);
+
+  // 👇 3. Verwijder de cirkel
+  setTimeout(() => {
+    circle.remove();
+  }, 1200);
+});
+
   
   closeBtn.addEventListener("click", () => {
     portal.classList.remove("active");
