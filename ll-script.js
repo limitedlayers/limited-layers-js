@@ -42,12 +42,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const alreadyRevealed = localStorage.getItem("glowRevealed") === "true";
 
-  if (alreadyRevealed && mask) {
-    mask.style.display = "none"; // mask weg, glow blijft
+  // Als al gezien → mask verbergen, maar glow zichtbaar houden
+  if (alreadyRevealed) {
+    if (mask) mask.style.display = "none";
+    return; // ⛔️ maar GEEN return als glow nog moet blijven
   }
 
-  if (!glow || !mask || alreadyRevealed) return;
+  if (!glow || !mask) return;
 
+  // Alleen eerste keer activeren
   glow.addEventListener("click", function (e) {
     const x = e.clientX;
     const y = e.clientY;
@@ -59,10 +62,11 @@ document.addEventListener("DOMContentLoaded", function () {
     localStorage.setItem("glowRevealed", "true");
 
     setTimeout(() => {
-      mask.style.display = "none"; // alleen mask verdwijnt
+      mask.style.display = "none";
     }, 1500);
   });
 });
+
 
 
 
