@@ -85,10 +85,10 @@ window.addEventListener("load", () => {
       circle.remove();
     }, 800);
   });
-
+  
   closeBtn.addEventListener("click", () => {
-    console.log("❌ Portal sluiten");
     portal.classList.remove("active");
+    portal.style.display = "none";
     document.body.style.overflow = "";
   });
 });
