@@ -71,13 +71,10 @@ window.addEventListener("load", () => {
     portal.style.setProperty("--y", y);
     portal.classList.add("active");
     document.body.style.overflow = "hidden";
-
-    console.log("✅ Menu geopend met clip-path op", x, y);
   });
 
   closeBtn.addEventListener("click", () => {
     portal.classList.remove("active");
     document.body.style.overflow = "";
-    console.log("❌ Menu gesloten");
   });
 });
