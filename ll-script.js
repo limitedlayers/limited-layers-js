@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   if (alreadyRevealed) {
     glow.style.display = "none";
-    mask.classList.add("open");
+    mask.classList.add("open", "no-transition"); // ⚠️ geen animatie bij terugkomst
     mask.style.pointerEvents = "none";
     return;
   }
@@ -67,11 +67,12 @@ document.addEventListener("DOMContentLoaded", function () {
     }, 1000);
 
     setTimeout(() => {
-      mask.classList.add("open");
+      mask.classList.add("open", "no-transition");
       mask.style.pointerEvents = "none";
     }, 1600);
   });
 });
+
 
 
 
