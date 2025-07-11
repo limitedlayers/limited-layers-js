@@ -71,9 +71,9 @@ hamburger.addEventListener("click", (e) => {
   document.body.style.overflow = "hidden";
 });
 
-  closeBtn.addEventListener("click", () => {
-    portal.classList.remove("active");
-    portal.style.display = "none";
-    document.body.style.overflow = "";
-  });
+closeBtn.addEventListener("click", () => {
+  portal.classList.remove("active");
+  // FADE hem uit via opacity en clip-path, dus GEEN display: none
+  document.body.style.overflow = "";
+});
 });
