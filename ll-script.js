@@ -64,34 +64,31 @@ window.addEventListener("load", () => {
     const x = e.clientX;
     const y = e.clientY;
 
-    // 1. Maak de circle
     const circle = document.createElement("div");
     circle.classList.add("portal-circle");
-    circle.style.left = `${x}px`;
     circle.style.top = `${y}px`;
+    circle.style.left = `${x}px`;
+    circle.style.width = "0px";
+    circle.style.height = "0px";
     document.body.appendChild(circle);
 
-    // 2. Trigger animatie
     setTimeout(() => {
       circle.style.width = "3000px";
       circle.style.height = "3000px";
-
       portal.classList.add("active");
       portal.style.display = "flex";
       document.body.style.overflow = "hidden";
+      document.body.classList.remove("cursor-hidden");
     }, 10);
 
-    // 3. Verwijder circle
     setTimeout(() => {
       circle.remove();
     }, 800);
   });
 
   closeBtn.addEventListener("click", () => {
+    console.log("❌ Portal sluiten");
     portal.classList.remove("active");
-    portal.style.display = "none";
     document.body.style.overflow = "";
   });
 });
-
-
