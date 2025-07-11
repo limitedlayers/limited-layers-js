@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-// 🌑 Reveal Glow Interactie
+// 🌑 Reveal Glow Interactie fixed
 document.addEventListener("DOMContentLoaded", function () {
   const glow = document.querySelector(".reveal-glow");
   const mask = document.querySelector(".reveal-mask");
