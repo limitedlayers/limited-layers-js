@@ -107,6 +107,4 @@ window.addEventListener("load", () => {
     portal.style.display = "none";
     document.body.style.overflow = "";
   });
-
-  console.log("✅ Portal script actief");
 });
