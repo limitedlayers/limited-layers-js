@@ -18,15 +18,23 @@ document.addEventListener("DOMContentLoaded", function () {
     aura.style.top = `${y}px`;
   });
 
-  const hoverTargets = document.querySelectorAll(
-    ".reveal-glow, button, .cta-button, .nav-link, .hamburger-icon"
-  );
+  // 🌕 Automatische hover-detectie op alles dat klikbaar is
+  document.addEventListener("mouseover", (e) => {
+    const target = e.target;
+    if (
+      target.closest(
+        "a, button, [role='button'], [data-hover], .cursor-hover, .reveal-glow"
+      )
+    ) {
+      aura.classList.add("hovered");
+    }
+  });
 
-  hoverTargets.forEach((el) => {
-    el.addEventListener("mouseenter", () => aura.classList.add("hovered"));
-    el.addEventListener("mouseleave", () => aura.classList.remove("hovered"));
+  document.addEventListener("mouseout", (e) => {
+    aura.classList.remove("hovered");
   });
 });
+
 
 // 🌕 Reveal Glow Interactie
 document.addEventListener("DOMContentLoaded", function () {
