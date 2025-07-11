@@ -35,10 +35,16 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-// 🌑 Reveal Glow Interactie
+// 🌑 Reveal Glow Interactie — slechts 1 keer tonen
 document.addEventListener("DOMContentLoaded", function () {
   const glow = document.querySelector(".reveal-glow");
   const mask = document.querySelector(".reveal-mask");
+
+  // Check of het al eens is gebeurd
+  if (localStorage.getItem("glowRevealed") === "true") {
+    if (glow) glow.style.display = "none"; // of .remove() als je het echt weg wilt
+    return;
+  }
 
   if (!glow || !mask) return;
 
@@ -49,8 +55,18 @@ document.addEventListener("DOMContentLoaded", function () {
     mask.style.clipPath = `circle(0% at ${x}px ${y}px)`;
     void mask.offsetWidth;
     mask.style.clipPath = `circle(150% at ${x}px ${y}px)`;
+
+    // Markeer dat het nu 'gezien' is
+    localStorage.setItem("glowRevealed", "true");
+
+    // Optioneel: glow langzaam laten verdwijnen
+    setTimeout(() => {
+      glow.style.opacity = "0";
+      glow.style.pointerEvents = "none";
+    }, 1000);
   });
 });
+
 
 // 🕳️ Menu Overlay zonder cirkel
 window.addEventListener("load", () => {
@@ -64,6 +80,9 @@ window.addEventListener("load", () => {
     const x = e.clientX;
     const y = e.clientY;
 
+    // Zet muispositie als variabelen voor de clip-path
+    portal.style.setProperty("--x", `${x}px`);
+    portal.style.setProperty("--y", `${y}px`);
 
     portal.classList.add("active");
     document.body.style.overflow = "hidden";
