@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-// 🌑 Reveal Glow Interactie fixed
+// 🌑 Reveal Glow Interactie
 document.addEventListener("DOMContentLoaded", function () {
   const glow = document.querySelector(".reveal-glow");
   const mask = document.querySelector(".reveal-mask");
@@ -77,10 +77,6 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-
-
-
-
 // 🕳️ Menu Overlay zonder cirkel
 window.addEventListener("load", () => {
   const hamburger = document.querySelector(".hamburger-icon");
@@ -89,18 +85,11 @@ window.addEventListener("load", () => {
 
   if (!hamburger || !portal || !closeBtn) return;
 
-  hamburger.addEventListener("click", (e) => {
-    const x = e.clientX;
-    const y = e.clientY;
-
-    // Zet muispositie als variabelen voor de clip-path
-    portal.style.setProperty("--x", `${x}px`);
-    portal.style.setProperty("--y", `${y}px`);
-
-    portal.classList.add("active");
-    document.body.style.overflow = "hidden";
-    document.body.classList.remove("cursor-hidden");
-  });
+hamburger.addEventListener("click", () => {
+  portal.classList.add("active");
+  document.body.style.overflow = "hidden";
+  document.body.classList.remove("cursor-hidden");
+});
 
   closeBtn.addEventListener("click", () => {
     console.log("❌ Portal sluiten");
