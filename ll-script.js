@@ -121,50 +121,30 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // 🔍 Search Overlay Slide-Up (onder navbar stoppen)
 document.addEventListener("DOMContentLoaded", function () {
-  const searchIcon = document.querySelector(".search-icon.cursor-hover");
-  const searchOverlay = document.querySelector(".search-overlay");
+  const searchIcon = document.querySelector(".search-icon");
   const closeSearch = document.querySelector(".close-search");
+  const searchOverlay = document.querySelector(".search-overlay");
 
-  if (!searchIcon || !searchOverlay || !closeSearch) return;
+  if (!searchIcon || !closeSearch || !searchOverlay) return;
 
   // Initieel
   searchIcon.classList.add("visible");
-  searchIcon.style.display = "inline-flex";
+  closeSearch.classList.remove("visible");
 
-  closeSearch.classList.add("hidden");
-  closeSearch.style.display = "none"; // Initieel verborgen
-
-  // 🔍 Klik op search
   searchIcon.addEventListener("click", () => {
     searchOverlay.classList.add("active");
     document.body.style.overflow = "hidden";
 
-    searchIcon.classList.replace("visible", "hidden");
-    searchIcon.style.display = "none";
-
-    // Belangrijk: reset element.style
-    closeSearch.style.removeProperty("display");
-
-    requestAnimationFrame(() => {
-      closeSearch.classList.replace("hidden", "visible");
-    });
+    searchIcon.classList.remove("visible");
+    closeSearch.classList.add("visible");
   });
 
-  // ❌ Klik op close
   closeSearch.addEventListener("click", () => {
     searchOverlay.classList.remove("active");
     document.body.style.overflow = "";
 
-    closeSearch.classList.replace("visible", "hidden");
-
-    setTimeout(() => {
-      closeSearch.style.display = "none"; // Pas verbergen ná fade-out
-    }, 400);
-
-    searchIcon.style.removeProperty("display");
-    requestAnimationFrame(() => {
-      searchIcon.classList.replace("hidden", "visible");
-    });
+    closeSearch.classList.remove("visible");
+    searchIcon.classList.add("visible");
   });
 });
 
