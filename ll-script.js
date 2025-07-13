@@ -127,9 +127,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
   if (!searchIcon || !searchOverlay || !closeSearch) return;
 
-  // Initieel: toon zoekicoon, verberg sluitknop
+  // Initieel
   searchIcon.classList.add("visible");
   searchIcon.style.display = "inline-flex";
+
   closeSearch.classList.add("hidden");
   closeSearch.style.display = "none";
 
@@ -141,27 +142,35 @@ document.addEventListener("DOMContentLoaded", function () {
     searchIcon.classList.replace("visible", "hidden");
     searchIcon.style.display = "none";
 
-    closeSearch.style.display = "inline-flex"; // tonen vóór fade-in
+    closeSearch.style.display = "inline-flex";
+
+    // 2x raf = DOM update laten voltooien vóór class switch
     requestAnimationFrame(() => {
-      closeSearch.classList.replace("hidden", "visible");
+      requestAnimationFrame(() => {
+        closeSearch.classList.replace("hidden", "visible");
+      });
     });
   });
 
-  // ❌ Klik op X
+  // ❌ Klik op close
   closeSearch.addEventListener("click", () => {
     searchOverlay.classList.remove("active");
     document.body.style.overflow = "";
 
     closeSearch.classList.replace("visible", "hidden");
+
     setTimeout(() => {
       closeSearch.style.display = "none";
-    }, 400); // fade-out klaar
+    }, 400);
 
-    searchIcon.style.display = "inline-flex"; // tonen vóór fade-in
+    searchIcon.style.display = "inline-flex";
     requestAnimationFrame(() => {
-      searchIcon.classList.replace("hidden", "visible");
+      requestAnimationFrame(() => {
+        searchIcon.classList.replace("hidden", "visible");
+      });
     });
   });
 });
+
 
 
