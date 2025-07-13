@@ -140,12 +140,14 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   // Sluit overlay als je buiten de content klikt
-  searchOverlay.addEventListener("click", (e) => {
-    if (e.target === searchOverlay) {
-      searchOverlay.classList.remove("active");
-      document.body.style.overflow = "";
-    }
-  });
+searchOverlay.addEventListener("click", (e) => {
+  const overlayInner = document.querySelector(".overlay-inner");
+  if (!overlayInner.contains(e.target)) {
+    searchOverlay.classList.remove("active");
+    document.body.style.overflow = "";
+  }
+});
+
 });
 
 
