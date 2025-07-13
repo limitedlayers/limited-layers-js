@@ -131,28 +131,22 @@ document.addEventListener("DOMContentLoaded", function () {
   searchIcon.classList.add("visible");
   closeSearch.classList.add("hidden");
 
-  // 🧲 Klik op het vergrootglas opent overlay
   searchIcon.addEventListener("click", () => {
+    console.log("🔍 Search clicked");
     searchOverlay.classList.add("active");
     document.body.style.overflow = "hidden";
 
-    // Switch icons
-    searchIcon.classList.remove("visible");
-    searchIcon.classList.add("hidden");
-    closeSearch.classList.remove("hidden");
-    closeSearch.classList.add("visible");
+    // Show/hide
+    searchIcon.classList.replace("visible", "hidden");
+    closeSearch.classList.replace("hidden", "visible");
   });
 
-  // ❌ Klik op sluit sluit overlay
   closeSearch.addEventListener("click", () => {
     searchOverlay.classList.remove("active");
     document.body.style.overflow = "";
 
-    // Switch terug
-    closeSearch.classList.remove("visible");
-    closeSearch.classList.add("hidden");
-    searchIcon.classList.remove("hidden");
-    searchIcon.classList.add("visible");
+    closeSearch.classList.replace("visible", "hidden");
+    searchIcon.classList.replace("hidden", "visible");
   });
 });
 
