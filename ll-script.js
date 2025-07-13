@@ -132,7 +132,7 @@ document.addEventListener("DOMContentLoaded", function () {
   searchIcon.style.display = "inline-flex";
 
   closeSearch.classList.add("hidden");
-  closeSearch.style.display = "none";
+  closeSearch.style.display = "none"; // Initieel verborgen
 
   // 🔍 Klik op search
   searchIcon.addEventListener("click", () => {
@@ -142,13 +142,11 @@ document.addEventListener("DOMContentLoaded", function () {
     searchIcon.classList.replace("visible", "hidden");
     searchIcon.style.display = "none";
 
-    closeSearch.style.display = "inline-flex";
+    // Belangrijk: reset element.style
+    closeSearch.style.removeProperty("display");
 
-    // 2x raf = DOM update laten voltooien vóór class switch
     requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        closeSearch.classList.replace("hidden", "visible");
-      });
+      closeSearch.classList.replace("hidden", "visible");
     });
   });
 
@@ -160,17 +158,16 @@ document.addEventListener("DOMContentLoaded", function () {
     closeSearch.classList.replace("visible", "hidden");
 
     setTimeout(() => {
-      closeSearch.style.display = "none";
+      closeSearch.style.display = "none"; // Pas verbergen ná fade-out
     }, 400);
 
-    searchIcon.style.display = "inline-flex";
+    searchIcon.style.removeProperty("display");
     requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        searchIcon.classList.replace("hidden", "visible");
-      });
+      searchIcon.classList.replace("hidden", "visible");
     });
   });
 });
+
 
 
 
