@@ -118,3 +118,26 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
+// 🔍 Search Overlay Slide-Up (onder navbar stoppen)
+document.addEventListener("DOMContentLoaded", function () {
+  const searchIcon = document.querySelector(".search-icon");
+  const searchOverlay = document.querySelector(".search-overlay");
+  const closeSearch = document.querySelector(".close-search");
+
+  if (!searchIcon || !searchOverlay) return;
+
+  // 🧲 Klik op het vergrootglas opent overlay van onder naar boven
+  searchIcon.addEventListener("click", () => {
+    searchOverlay.classList.add("active");
+    document.body.style.overflow = "hidden";
+  });
+
+  // ❌ Optioneel: klik op .close-search sluit de overlay
+  if (closeSearch) {
+    closeSearch.addEventListener("click", () => {
+      searchOverlay.classList.remove("active");
+      document.body.style.overflow = "";
+    });
+  }
+});
