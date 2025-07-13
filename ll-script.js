@@ -125,19 +125,34 @@ document.addEventListener("DOMContentLoaded", function () {
   const searchOverlay = document.querySelector(".search-overlay");
   const closeSearch = document.querySelector(".close-search");
 
-  if (!searchIcon || !searchOverlay) return;
+  if (!searchIcon || !searchOverlay || !closeSearch) return;
 
-  // 🧲 Klik op het vergrootglas opent overlay van onder naar boven
+  // Initieel: show search, hide close
+  searchIcon.classList.add("visible");
+  closeSearch.classList.add("hidden");
+
+  // 🧲 Klik op het vergrootglas opent overlay
   searchIcon.addEventListener("click", () => {
     searchOverlay.classList.add("active");
     document.body.style.overflow = "hidden";
+
+    // Switch icons
+    searchIcon.classList.remove("visible");
+    searchIcon.classList.add("hidden");
+    closeSearch.classList.remove("hidden");
+    closeSearch.classList.add("visible");
   });
 
-  // ❌ Optioneel: klik op .close-search sluit de overlay
-  if (closeSearch) {
-    closeSearch.addEventListener("click", () => {
-      searchOverlay.classList.remove("active");
-      document.body.style.overflow = "";
-    });
-  }
+  // ❌ Klik op sluit sluit overlay
+  closeSearch.addEventListener("click", () => {
+    searchOverlay.classList.remove("active");
+    document.body.style.overflow = "";
+
+    // Switch terug
+    closeSearch.classList.remove("visible");
+    closeSearch.classList.add("hidden");
+    searchIcon.classList.remove("hidden");
+    searchIcon.classList.add("visible");
+  });
 });
+
