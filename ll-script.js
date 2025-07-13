@@ -133,10 +133,18 @@ document.addEventListener("DOMContentLoaded", function () {
     document.body.style.overflow = "hidden";
   });
 
-  // Sluit overlay
+  // Sluit overlay via X
   closeSearch.addEventListener("click", () => {
     searchOverlay.classList.remove("active");
     document.body.style.overflow = "";
+  });
+
+  // Sluit overlay als je buiten de content klikt
+  searchOverlay.addEventListener("click", (e) => {
+    if (e.target === searchOverlay) {
+      searchOverlay.classList.remove("active");
+      document.body.style.overflow = "";
+    }
   });
 });
 
