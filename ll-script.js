@@ -121,7 +121,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // 🔍 Search Overlay Slide-Up (onder navbar stoppen)
 document.addEventListener("DOMContentLoaded", function () {
-  const searchIcon = document.querySelector(".search-icon");
+  const searchIcon = document.querySelector(".search-icon.cursor-hover");
   const searchOverlay = document.querySelector(".search-overlay");
   const closeSearch = document.querySelector(".close-search");
 
