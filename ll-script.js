@@ -119,32 +119,22 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-// 🔍 Search Overlay Slide-Up (onder navbar stoppen)
+// 🔍 Alleen de Search Overlay Slide-Up (onder navbar stoppen)
 document.addEventListener("DOMContentLoaded", function () {
+  const searchOverlay = document.querySelector(".search-overlay");
   const searchIcon = document.querySelector(".search-icon");
   const closeSearch = document.querySelector(".close-search");
-  const searchOverlay = document.querySelector(".search-overlay");
 
   if (!searchIcon || !closeSearch || !searchOverlay) return;
-
-  // Initieel
-  searchIcon.classList.add("visible");
-  closeSearch.classList.remove("visible");
 
   searchIcon.addEventListener("click", () => {
     searchOverlay.classList.add("active");
     document.body.style.overflow = "hidden";
-
-    searchIcon.classList.remove("visible");
-    closeSearch.classList.add("visible");
   });
 
   closeSearch.addEventListener("click", () => {
     searchOverlay.classList.remove("active");
     document.body.style.overflow = "";
-
-    closeSearch.classList.remove("visible");
-    searchIcon.classList.add("visible");
   });
 });
 
