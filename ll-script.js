@@ -129,24 +129,38 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Initieel: show search, hide close
   searchIcon.classList.add("visible");
-  closeSearch.classList.add("hidden");
+  searchIcon.style.display = "inline-flex";
 
+  closeSearch.classList.add("hidden");
+  closeSearch.style.display = "none";
+
+  // 🧲 Klik op het vergrootglas opent overlay
   searchIcon.addEventListener("click", () => {
     console.log("🔍 Search clicked");
     searchOverlay.classList.add("active");
     document.body.style.overflow = "hidden";
 
-    // Show/hide
+    // Show/hide icons
     searchIcon.classList.replace("visible", "hidden");
+    searchIcon.style.display = "none";
+
     closeSearch.classList.replace("hidden", "visible");
+    closeSearch.style.display = "inline-flex";
+    closeSearch.style.opacity = "1";
   });
 
+  // ❌ Klik op X sluit overlay
   closeSearch.addEventListener("click", () => {
     searchOverlay.classList.remove("active");
     document.body.style.overflow = "";
 
     closeSearch.classList.replace("visible", "hidden");
+    closeSearch.style.display = "none";
+
     searchIcon.classList.replace("hidden", "visible");
+    searchIcon.style.display = "inline-flex";
+    searchIcon.style.opacity = "1";
   });
 });
+
 
