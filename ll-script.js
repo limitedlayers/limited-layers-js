@@ -127,17 +127,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
   if (!searchIcon || !closeSearch || !searchOverlay) return;
 
+  // Open overlay
   searchIcon.addEventListener("click", () => {
     searchOverlay.classList.add("active");
     document.body.style.overflow = "hidden";
   });
 
+  // Sluit overlay
   closeSearch.addEventListener("click", () => {
     searchOverlay.classList.remove("active");
     document.body.style.overflow = "";
   });
 });
-
 
 
 
