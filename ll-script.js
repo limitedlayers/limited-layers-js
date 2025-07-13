@@ -129,20 +129,19 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Initieel: toon zoekicoon, verberg sluitknop
   searchIcon.classList.add("visible");
+  searchIcon.style.display = "inline-flex";
   closeSearch.classList.add("hidden");
   closeSearch.style.display = "none";
 
   // 🔍 Klik op search
   searchIcon.addEventListener("click", () => {
-    console.log("🔍 Search clicked");
     searchOverlay.classList.add("active");
     document.body.style.overflow = "hidden";
 
     searchIcon.classList.replace("visible", "hidden");
     searchIcon.style.display = "none";
 
-    closeSearch.style.display = "inline-flex"; // of block
-    // Nu pas zichtbaar maken
+    closeSearch.style.display = "inline-flex"; // tonen vóór fade-in
     requestAnimationFrame(() => {
       closeSearch.classList.replace("hidden", "visible");
     });
@@ -154,12 +153,11 @@ document.addEventListener("DOMContentLoaded", function () {
     document.body.style.overflow = "";
 
     closeSearch.classList.replace("visible", "hidden");
-    // wacht op fade out en dan verbergen
     setTimeout(() => {
       closeSearch.style.display = "none";
-    }, 400); // match transition
+    }, 400); // fade-out klaar
 
-    searchIcon.style.display = "inline-flex";
+    searchIcon.style.display = "inline-flex"; // tonen vóór fade-in
     requestAnimationFrame(() => {
       searchIcon.classList.replace("hidden", "visible");
     });
